@@ -1,0 +1,3 @@
+**/__pycache__
+*.~undo-tree~
+*.sqlite
