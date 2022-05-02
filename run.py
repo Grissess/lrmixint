@@ -163,6 +163,7 @@ class Case:
         self.profiles = {} # sample name -> Profile
         self.hyp = Hypotheses()
         self.rare = 0.001
+        self.props = {}  # Extra data used by interfaces, not otherwise used
 
     def add_profiles(self, *profs):
         for prof in profs:
@@ -201,6 +202,7 @@ class Case:
             'rare': self.rare,
             'replicates': list(self.replicates),
             'profiles': [prof.to_json() for prof in self.profiles.values()],
+            'props': self.props,
             'hyp': self.hyp.to_json(),
         }
 
@@ -208,6 +210,7 @@ class Case:
         self.rare = jo['rare']
         self.replicates = set(jo['replicates'])
         self.profiles = {}
+        self.props = jo['props']
         for ob in jo['profiles']:
             prof = make_from_json(Profile, ob)
             self.add_profiles(prof)
